@@ -15,4 +15,4 @@ What you'll need for the project:
 6. webcam - 1 item
 7. plastic box
 
-![alt text](https://cdn.discordapp.com/attachments/990218769823567883/1005689328216846356/IMG_20220807_110838.jpg)
+![alt text](https://cdn.discordapp.com/attachments/990218769823567883/1005690992994820146/IMG_20220807_110838.jpg)
