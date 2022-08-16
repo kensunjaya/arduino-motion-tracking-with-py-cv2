@@ -68,7 +68,7 @@ while True:
     
     check, frame = video.read()
     try:
-        # Remove unwanted shadows from the image (also reduce frame rate)
+        # Remove unwanted shadows from the image (massive frame rate loss)
         img_hsv: np.ndarray = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
         mask = cv2.inRange(src=img_hsv, lowerb=np.array([0, 64, 133]), upperb=np.array([255, 255, 255]))
         img_hsv_modify: np.ndarray = cv2.bitwise_and(frame, frame, mask=mask)
