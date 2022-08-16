@@ -186,18 +186,21 @@ while True:
     key = cv2.waitKey(1)
     # if q entered whole process will stop
     if key == ord('q'):
+        video.release()
+        reset()
+        time.sleep(0.001) 
         turn_off()
+        
         second = -1
         break
+    # if l entered laser diode will turn off
     if key == ord('l'):
         turn_off()
+    # if r entered turret position will reset
     if key == ord('r'):
         reset()
 
     continue
     
-    
-
-video.release()
 
 cv2.destroyAllWindows()
