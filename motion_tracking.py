@@ -16,28 +16,6 @@ second = 0
 
 isArduinoAvailable = True
 
-try:
-    # Make sure to set the baudrate to 2000000 in your arduino IDE
-    # Lower baudrate = more data loss
-    arduino = serial.Serial(port='COM5', baudrate=2000000, timeout=2)
-except serial.serialutil.SerialException:
-    print("Failed to communicate with arduino board\nPossible solutions :\n1. Close arduino serial monitor\n2. Change serial port\n3. Reset arduino board\n")
-    isArduinoAvailable = False
-
-
-
-# List when any moving object appear
-motion_list = [None, None]
-static_back = None
-
-# Capturing video - remove 2nd parameter if you're experiencing low FPS
-video = cv2.VideoCapture(0, cv2.CAP_DSHOW) 
-
-video.set(cv2.CAP_PROP_FRAME_WIDTH, 1920)
-video.set(cv2.CAP_PROP_FRAME_HEIGHT, 1080)
-
-font = cv2.QT_FONT_NORMAL
-
 def reset():
     arduino.write(("960 1000").encode())
     time.sleep(0.1)
@@ -70,14 +48,34 @@ def reset_position():
         if second < 0:
             break
 
+try:
+    # Make sure to set the baudrate to 2000000 in your arduino IDE
+    # Lower baudrate = more data loss
+    arduino = serial.Serial(port='COM5', baudrate=2000000, timeout=2)
+    time.sleep(0.001)
+    turn_on()
+except serial.serialutil.SerialException:
+    print("Failed to communicate with arduino board\nPossible solutions :\n1. Close arduino serial monitor\n2. Change serial port\n3. Reset arduino board\n")
+    isArduinoAvailable = False
+
+
+# List when any moving object appear
+motion_list = [None, None]
+static_back = None
+
+# Capturing video - remove 2nd parameter if you're experiencing low FPS
+video = cv2.VideoCapture(0, cv2.CAP_DSHOW) 
+
+video.set(cv2.CAP_PROP_FRAME_WIDTH, 1920)
+video.set(cv2.CAP_PROP_FRAME_HEIGHT, 1080)
+
+font = cv2.QT_FONT_NORMAL
+
 if isArduinoAvailable:
     (threading.Thread(target=reset_position)).start()
     
-        
-
 
 while True:
-    
     check, frame = video.read()
     try:
         # Remove unwanted shadows from the image (massive frame rate loss)
