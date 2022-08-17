@@ -39,13 +39,25 @@ video.set(cv2.CAP_PROP_FRAME_HEIGHT, 1080)
 font = cv2.QT_FONT_NORMAL
 
 def reset():
-    arduino.write(("960" + " " + "1000").encode())
+    arduino.write(("960 1000").encode())
     time.sleep(0.1)
-    arduino.write(("960" + " " + "540").encode())
+    arduino.write(("960 540").encode())
+
+def toggle():
+    if isArduinoAvailable:
+        arduino.write("9999 9999".encode())
 
 def turn_off():
     if isArduinoAvailable:
-        arduino.write("o".encode())
+        arduino.write("9998 9998".encode())
+
+def turn_on():
+    if isArduinoAvailable:
+        arduino.write("9998 9999".encode())
+
+def reset_board():
+    if isArduinoAvailable:
+        arduino.write("9998 9997".encode())
 
 
 def reset_position():
@@ -188,17 +200,22 @@ while True:
     if key == ord('q'):
         video.release()
         reset()
-        time.sleep(0.001) 
+        time.sleep(0.001)
         turn_off()
         
         second = -1
         break
-    # if l entered laser diode will turn off
     if key == ord('l'):
-        turn_off()
-    # if r entered turret position will reset
+        toggle()
     if key == ord('r'):
         reset()
+    if key == ord('1'):
+        turn_on()
+    if key == ord("2"):
+        turn_off()
+    if key == ord("0"):
+        reset_board()
+
 
     continue
     
