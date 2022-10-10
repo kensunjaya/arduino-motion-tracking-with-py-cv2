@@ -1,7 +1,6 @@
 #include <Servo.h>
 
 #define laserPin 11
-#define resetPin 3
 
 Servo servo_x;
 Servo servo_y;
@@ -26,18 +25,15 @@ void detach_servo() {
 */
 
 void setup() {
-  digitalWrite(resetPin, HIGH);
-  delay(200);
   pinMode(laserPin, OUTPUT);
-  pinMode(resetPin, OUTPUT);
+  digitalWrite(laserPin, HIGH);
+  
   attach_servo();
   servo_x.write(95);
   servo_y.write(30);
-  digitalWrite(laserPin, HIGH);
   
   Serial.begin(2000000);
-  Serial.setTimeout(2);
-  delay(200);
+  Serial.setTimeout(10);
 }
 
 void loop() {
@@ -46,28 +42,31 @@ void loop() {
   b = Serial.readString();
   x_axis = b.substring(0, b.indexOf(" ")).toInt();
   y_axis = b.substring(b.indexOf(" ")+1).toInt();
+    
   if ((x_axis + y_axis) <= 3000) {
     degree_x = x_axis/sensitivity_x;
     degree_y = y_axis/sensitivity_y;
 
-    servo_x.write(52 + degree_x);
+    servo_x.write(50 + degree_x);
     servo_y.write(degree_y);
 
   }
-  else if ((x_axis + y_axis) == 19998) { // Toggle Laser
-    if (digitalRead(laserPin) == HIGH)
-    digitalWrite(laserPin, LOW);
-    else
-    digitalWrite(laserPin, HIGH);
-  }
-  else if ((x_axis + y_axis) == 19996) { // Turn off Laser
-    digitalWrite(laserPin, LOW);
-  }
-  else if ((x_axis + y_axis) == 19997) { // Turn on Laser
-    digitalWrite(laserPin, HIGH);
-  }
-  else if ((x_axis + y_axis) == 19995) { // Reset board
-    digitalWrite(resetPin, LOW);
+  
+  switch (x_axis + y_axis) {
+    case 19998:   // Toggle laser
+      if (digitalRead(laserPin) == HIGH) {
+        digitalWrite(laserPin, LOW);
+      }
+      else {
+        digitalWrite(laserPin, HIGH);
+      }
+      break;
+    case 19996: // Turn off laser
+      digitalWrite(laserPin, LOW);
+      break;
+    case 19997: // Turn on laser
+      digitalWrite(laserPin, HIGH);
+      break;
   }
   
   Serial.flush();
