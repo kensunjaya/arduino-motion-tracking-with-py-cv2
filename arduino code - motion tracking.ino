@@ -6,7 +6,7 @@ Servo servo_x;
 Servo servo_y;
 
 int degree_x, degree_y, x_axis, y_axis;
-int sensitivity_x = 22; //Lower value = more sensitive
+int sensitivity_x = 24; //Lower value = more sensitive
 int sensitivity_y = 25; //Lower value = more sensitive
 
 String b;
@@ -33,7 +33,7 @@ void setup() {
   servo_y.write(30);
   
   Serial.begin(2000000);
-  Serial.setTimeout(10);
+  Serial.setTimeout(1);
 }
 
 void loop() {
@@ -49,7 +49,6 @@ void loop() {
 
     servo_x.write(50 + degree_x);
     servo_y.write(degree_y);
-
   }
   
   switch (x_axis + y_axis) {
