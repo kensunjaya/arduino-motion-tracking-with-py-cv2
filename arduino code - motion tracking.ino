@@ -7,12 +7,11 @@
 Servo servo_x;
 Servo servo_y;
 
-int degree_x, degree_y, x_axis, y_axis;
-int sensitivity_x = 24; //Lower value = more sensitive
+int angle_x, angle_y, x_data, y_data;
+int sensitivity_x = 25; //Lower value = more sensitive
 int sensitivity_y = 25; //Lower value = more sensitive
 
 String pyData;
-
 
 void attach_servo() {
   servo_x.attach(xPin);
@@ -42,33 +41,35 @@ void loop() {
   while(!Serial.available());
   
   pyData = Serial.readString();
-  x_axis = pyData.substring(0, pyData.indexOf(" ")).toInt();
-  y_axis = pyData.substring(pyData.indexOf(" ")+1).toInt();
+  x_data = pyData.substring(0, pyData.indexOf(" ")).toInt();
+  y_data = pyData.substring(pyData.indexOf(" ")+1).toInt();
     
-  if ((x_axis + y_axis) <= 3000) {
-    degree_x = x_axis/sensitivity_x;
-    degree_y = y_axis/sensitivity_y;
+  if ((x_data + y_data) <= 3000) {
+    // Argumen ke-3 harus dikalibrasi ulang setiap kali alat dibongkar pasang
+    angle_x = map(x_data, 0, 1920, 55, 1920/sensitivity_x + 55);
+    angle_y = map(y_data, 0, 1080, 10, 1080/sensitivity_y + 10);
 
-    servo_x.write(50 + degree_x);
-    servo_y.write(degree_y);
+    servo_x.write(angle_x);
+    servo_y.write(angle_y);
   }
-
-  // Laser Functionality
-  switch (x_axis + y_axis) {
-    case 19998:   // Toggle laser
-      if (digitalRead(laserPin) == HIGH) {
+  else {
+    // Laser Functionality
+    switch (x_data + y_data) {
+      case 19998:   // Toggle laser
+        if (digitalRead(laserPin) == HIGH) {
+          digitalWrite(laserPin, LOW);
+        }
+        else {
+          digitalWrite(laserPin, HIGH);
+        }
+        break;
+      case 19996: // Turn off laser
         digitalWrite(laserPin, LOW);
-      }
-      else {
+        break;
+      case 19997: // Turn on laser
         digitalWrite(laserPin, HIGH);
-      }
-      break;
-    case 19996: // Turn off laser
-      digitalWrite(laserPin, LOW);
-      break;
-    case 19997: // Turn on laser
-      digitalWrite(laserPin, HIGH);
-      break;
+        break;
+    }
   }
   
   Serial.flush();
