@@ -23,6 +23,19 @@ https://www.youtube.com/shorts/dnyTHZVyEF8
 Schematic :
 ![alt text](https://cdn.discordapp.com/attachments/1041011411658223636/1106828189327708220/Motion_Tracker_Schematic.png)
 
+To adjust the servo base position, you can change this code :
+```
+//change 55 and 10
+angle_x = map(x_data, 0, 1920, 55, 1920/sensitivity_x + 55);
+angle_y = map(y_data, 0, 1080, 10, 1080/sensitivity_y + 10);
+```
+
+If you are using different camera model, you might need to adjust these variables (as the camera might have a different field of view) :
+```
+int sensitivity_x = 25; //Lower value = more sensitive
+int sensitivity_y = 25; //Lower value = more sensitive
+```
+
 ![alt text](https://cdn.discordapp.com/attachments/990218769823567883/1005691253972803685/IMG_20220807_110838.jpg)
 
 ![alt text](https://cdn.discordapp.com/attachments/990218769823567883/1005691551499948182/1659845404713.jpg)
