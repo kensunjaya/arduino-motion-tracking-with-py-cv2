@@ -36,8 +36,6 @@ int sensitivity_x = 25; //Lower value = more sensitive
 int sensitivity_y = 25; //Lower value = more sensitive
 ```
 
-![alt text](https://cdn.discordapp.com/attachments/990218769823567883/1005691253972803685/IMG_20220807_110838.jpg)
-
-![alt text](https://cdn.discordapp.com/attachments/990218769823567883/1005691551499948182/1659845404713.jpg)
+![alt text](https://imgur.com/a/tyUoeU8)
 
 
