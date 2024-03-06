@@ -21,7 +21,7 @@ What you'll need for the project:
 https://www.youtube.com/shorts/dnyTHZVyEF8
 
 Schematic :
-![alt text](https://cdn.discordapp.com/attachments/1041011411658223636/1106828189327708220/Motion_Tracker_Schematic.png)
+![alt text](https://i.imgur.com/qoc0ZfX.png)
 
 To adjust the servo base position, you can change this code :
 ```
