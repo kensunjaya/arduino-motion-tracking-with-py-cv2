@@ -36,6 +36,6 @@ int sensitivity_x = 25; //Lower value = more sensitive
 int sensitivity_y = 25; //Lower value = more sensitive
 ```
 
-![alt text](https://imgur.com/a/tyUoeU8)
+![alt text](https://imgur.com/a/tyUoeU8.png)
 
 
