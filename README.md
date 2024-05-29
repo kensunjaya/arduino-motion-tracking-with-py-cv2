@@ -38,6 +38,6 @@ int sensitivity_x = 25; // Lower value = more sensitive
 int sensitivity_y = 25; // Lower value = more sensitive
 ```
 
-![alt text](https://i.imgur.com/mmzHCyZ.png)
+<img src="https://i.imgur.com/mmzHCyZ.png" width=80% height=80%>
 
 
