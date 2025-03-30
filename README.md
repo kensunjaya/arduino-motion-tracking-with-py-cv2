@@ -1,4 +1,4 @@
-# arduino-motion-tracking-with-py-cv2
+# Dual Axis Motion Tracker with Python OpenCV and Arduino
 Simple arduino motion tracking with python OpenCV via serial communication
 
 ## Install required depedencies:
@@ -11,7 +11,7 @@ python -m pip install numpy
 ## Materials needed to build this project:
 1. Dual axis micro servo bracket - (1)
 2. SG90 / MG90s (optional) - (2)
-3. KY-008 laser diode - (1)
+3. KY-008 laser module - (1)
 4. Arduino UNO / Nano / Mega (optional) - (1)
 5. Jumper wires (male - female & male - male)
 6. 1080p webcam - (1)
@@ -37,6 +37,7 @@ If you are using different camera model, you might need to adjust these variable
 int sensitivity_x = 25; // Lower value = more sensitive
 int sensitivity_y = 25; // Lower value = more sensitive
 ```
+In this project, I am using Logitech C615 as the camera module.
 
 <img src="https://i.imgur.com/mmzHCyZ.png" width=80% height=80%>
 
